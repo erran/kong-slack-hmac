@@ -1,9 +1,8 @@
 package = "kong-slack-hmac"
 version = "dev-1"
-rockspec_format = "3.0"
 
 source = {
-   url = "git+ssh://git@github.com/erran/kong-slack-hmac.git"
+   url = "git://github.com/erran/kong-slack-hmac"
 }
 
 description = {
@@ -17,9 +16,9 @@ A Kong plugin for verifying requests from Slack.
 build = {
    type = "builtin",
    modules = {
-     ["kong.plugins.slack-hmac.handler"] = "src/handler.lua",
-     ["kong.plugins.slack-hmac.signer"] = "src/signer.lua",
-     ["kong.plugins.slack-hmac.schema"] = "src/schema.lua"
+     ["kong.plugins.slack-hmac.handler"] = "src/kong/plugins/slack-hmac/handler.lua",
+     ["kong.plugins.slack-hmac.signer"] = "src/kong/plugins/slack-hmac/signer.lua",
+     ["kong.plugins.slack-hmac.schema"] = "src/kong/plugins/slack-hmac/schema.lua"
    }
 }
 
