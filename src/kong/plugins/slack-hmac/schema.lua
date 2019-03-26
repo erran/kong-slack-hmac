@@ -1,17 +1,6 @@
-local typedefs = require "kong.db.schema.typedefs"
-
 return {
-  name = "slack-hmac",
+  no_consumer = true,
   fields = {
-    { consumer = typedefs.no_consumer },
-    { run_on = typedefs.run_on_first },
-    {
-      config = {
-        type = "record",
-        fields = {
-          { hide_credentials = { type = "boolean", default = false }, },
-        },
-      },
-    },
-  },
+    hide_credentials = { type = "boolean", default = false },
+  }
 }

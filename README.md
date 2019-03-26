@@ -1,4 +1,6 @@
 # kong-slack-hmac
+**Tested with Kong v0.12.3.**
+
 A [Kong][] plugin for [verifying requests from Slack][].
 
 ## Development
