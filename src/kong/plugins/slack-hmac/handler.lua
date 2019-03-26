@@ -1,5 +1,6 @@
 local Handler = require("kong.plugins.base_plugin"):extend()
 local Signer = require("kong.plugins.slack-hmac.signer")
+local responses = require("kong.tools.responses")
 
 local X_SLACK_SIGNATURE = "X-Slack-Signature"
 local X_SLACK_REQUEST_TIMESTAMP = "X-Slack-Request-Timestamp"
@@ -11,9 +12,15 @@ end
 function Handler:access(conf)
   Handler.super.access(self)
 
+  ngx.req.read_body()
+  local body = ngx.req.get_body_data()
+  if not body then
+    return responses.send_METHOD_NOT_ALLOWED()
+  end
+
   local headers = ngx.req.get_headers()
-  local ok, err = Signer.validate({
-    body = kong.request.get_raw_body(),
+  local ok, err = Signer:validate({
+    body = body,
     signature = headers[X_SLACK_SIGNATURE] or "",
     timestamp = headers[X_SLACK_REQUEST_TIMESTAMP] or "",
   }, conf.secret)
