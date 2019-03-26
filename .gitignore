@@ -38,4 +38,7 @@ luac.out
 *.i*86
 *.x86_64
 *.hex
+
+# luarocks artifacts
 *.rock
+kong-slack-hmac*
