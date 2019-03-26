@@ -5,8 +5,6 @@ local decode_base64 = ngx.decode_base64
 
 local Signer = {}
 
-local SIGNATURES_DID_NOT_MATCH_ERR = "Signature did not match expected."
-
 function Signer:sign(request, secret)
   local payload = 'v0:' .. request.timestamp .. ':' .. request.body
   local hmac_signature, err = resty_hmac:new(secret):generate_signature("sha256", payload)
@@ -18,16 +16,12 @@ function Signer:sign(request, secret)
 end
 
 function Signer:validate(request, secret)
-  local payload = 'v0:' .. request.timestamp .. ':' .. request.body
-  local expected = string.sub(request.signature, 4)
-  local ok, err = resty_hmac:new(secret):check_signature("sha256", payload, nil, expected)
+  local computed, err = Signer:sign(request, secret)
   if err then
     return nil, err
-  elseif not ok then
-    return nil, SIGNATURES_DID_NOT_MATCH_ERR
   end
 
-  return true, nil
+  return request.signature == computed, nil
 end
 
 return Signer
