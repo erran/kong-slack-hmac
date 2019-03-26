@@ -1,5 +1,5 @@
 package = "kong-slack-hmac"
-version = "0.12.3"
+version = "0.12.3-0"
 
 source = {
    url = "git://github.com/erran/kong-slack-hmac",
