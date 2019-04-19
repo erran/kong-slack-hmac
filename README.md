@@ -1,4 +1,6 @@
 # kong-slack-hmac
+![erran/kong-slack-hmac luarocks badge][] ![tested with badge][]
+
 **Tested with Kong v0.12.3.**
 
 A [Kong][] plugin for [verifying requests from Slack][].
@@ -18,3 +20,5 @@ brew install openresty
 
 [Kong]: https://konghq.com/kong/
 [verifying requests from Slack]: https://api.slack.com/docs/verifying-requests-from-slack
+[erran/kong-slack-hmac luarocks badge]: https://img.shields.io/luarocks/v/erran/kong-slack-hmac/0.12.3-0.svg
+[tested with badge]: https://img.shields.io/badge/kong-v0.12.3-9cf.svg
